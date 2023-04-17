@@ -57,10 +57,10 @@
     <header>
         <h1>Charactersheet</h1>
     </header>
-    <table>
+    <table id="handeln">
         <tr>
             <th>Handelsbonus</th>
-            <th colspan=2 id="bonus"></th>
+            <td colspan=2 id="bonus"></td>
         </tr>
         <tr>
             <th>Fähigkeit</th>
@@ -92,7 +92,7 @@
     <table>
         <tr>
             <th>Wissensbonus</th>
-            <th colspan=2></th>
+            <td colspan=2 id="bonus"></td>
         </tr>
         <tr>
             <th>Fähigkeit</th>
@@ -113,8 +113,8 @@
 
     <table>
         <tr>
-            <th>Wissensbonus</th>
-            <th colspan=2></th>
+            <th>Sozialbonus</th>
+            <td colspan=2 id="bonus"></td>
         </tr>
         <tr>
             <th>Fähigkeit</th>
@@ -136,18 +136,18 @@
     <script>
         const table = document.querySelector('table');
         const rows = table.rows;
-        const lastRowIndex = rows.length - 1;
+        const lastRowIndex = rows.length;
 
         let categorySum = 0;
         let bonus = 0;
 
-        for (let i = 1; i < lastRowIndex; i++) {
+        for (let i = 2; i < lastRowIndex; i++) {
             const cells = rows[i].cells;
             const value = parseInt(cells[1].textContent);
             categorySum += value;
         }
 
-        bonus = math.round(categorySum / 10);
+        bonus = Math.round(categorySum / 10);
         document.getElementById('bonus').textContent = bonus;
     </script>
 </body>
