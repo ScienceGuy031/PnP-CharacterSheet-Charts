@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pen & Paper Charactersheet Stats</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+        }
+        
+        .page {
+            flex: 1;
+            padding: 20px;
+            box-sizing: border-box;
+            height: 100vh;
+            overflow-y: scroll;
+        }
+        
+        .page-1 {
+            background-color: #f7f7f7;
+        }
+        
+        .page-2 {
+            background-color: #fff;
+        }
+        
+        table {
+            border-collapse: collapse;
+            margin: 20px;
+        }
+        
+        table td,
+        table th {
+            border: 1px solid #ccc;
+            padding: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>Charactersheet</h1>
+    </header>
+    <table>
+        <tr>
+            <th>Handelsbonus</th>
+            <th colspan=2 id="bonus"></th>
+        </tr>
+        <tr>
+            <th>Fähigkeit</th>
+            <th>vergebene Punkte</th>
+            <th>resultierender Fähigkeitswert</th>
+        </tr>
+        <tr>
+            <th>Nahkampf (Einhand)</th>
+            <td>25</td>
+            <th></th>
+        </tr>
+        <tr>
+            <th>Schießen</th>
+            <td>70</td>
+            <th></th>
+        </tr>
+        <tr>
+            <th>Zechen</th>
+            <td>40</td>
+            <th></th>
+        </tr>
+        <tr>
+            <th>Segeln</th>
+            <td>30</td>
+            <th></th>
+        </tr>
+    </table>
+
+    <table>
+        <tr>
+            <th>Wissensbonus</th>
+            <th colspan=2></th>
+        </tr>
+        <tr>
+            <th>Fähigkeit</th>
+            <th>vergebene Punkte</th>
+            <th>resultierender Fähigkeitswert</th>
+        </tr>
+        <tr>
+            <th>Arkane Magie</th>
+            <td>40</td>
+            <th></th>
+        </tr>
+        <tr>
+            <th>Waffentechnologie</th>
+            <td>50</td>
+            <th></th>
+        </tr>
+    </table>
+
+    <table>
+        <tr>
+            <th>Wissensbonus</th>
+            <th colspan=2></th>
+        </tr>
+        <tr>
+            <th>Fähigkeit</th>
+            <th>vergebene Punkte</th>
+            <th>resultierender Fähigkeitswert</th>
+        </tr>
+        <tr>
+            <th>Menschenkenntnis</th>
+            <td>50</td>
+            <th></th>
+        </tr>
+        <tr>
+            <th>Betören</th>
+            <td>40</td>
+            <th></th>
+        </tr>
+    </table>
+
+    <script>
+        const table = document.querySelector('table');
+        const rows = table.rows;
+        const lastRowIndex = rows.length - 1;
+
+        let categorySum = 0;
+        let bonus = 0;
+
+        for (let i = 1; i < lastRowIndex; i++) {
+            const cells = rows[i].cells;
+            const value = parseInt(cells[1].textContent);
+            categorySum += value;
+        }
+
+        bonus = math.round(categorySum / 10);
+        document.getElementById('bonus').textContent = bonus;
+    </script>
+</body>
+
+</html>
