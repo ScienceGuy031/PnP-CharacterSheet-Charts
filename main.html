@@ -19,27 +19,6 @@
             text-align: center;
         }
         
-        .container {
-            display: flex;
-            flex-wrap: wrap;
-        }
-        
-        .page {
-            flex: 1;
-            padding: 20px;
-            box-sizing: border-box;
-            height: 100vh;
-            overflow-y: scroll;
-        }
-        
-        .page-1 {
-            background-color: #f7f7f7;
-        }
-        
-        .page-2 {
-            background-color: #fff;
-        }
-        
         table {
             border-collapse: collapse;
             margin: 20px;
@@ -57,10 +36,10 @@
     <header>
         <h1>Charactersheet</h1>
     </header>
-    <table id="handeln">
+    <table id="handelnstats">
         <tr>
             <th>Handelsbonus</th>
-            <td colspan=2 id="bonus"></td>
+            <td colspan=2 id="handelsbonus"></td>
         </tr>
         <tr>
             <th>Fähigkeit</th>
@@ -89,10 +68,10 @@
         </tr>
     </table>
 
-    <table>
+    <table id="wissenstats">
         <tr>
             <th>Wissensbonus</th>
-            <td colspan=2 id="bonus"></td>
+            <td colspan=2 id="wissensbonus"></td>
         </tr>
         <tr>
             <th>Fähigkeit</th>
@@ -111,10 +90,10 @@
         </tr>
     </table>
 
-    <table>
+    <table id="sozialstats">
         <tr>
             <th>Sozialbonus</th>
-            <td colspan=2 id="bonus"></td>
+            <td colspan=2 id="sozialbonus"></td>
         </tr>
         <tr>
             <th>Fähigkeit</th>
@@ -134,21 +113,36 @@
     </table>
 
     <script>
-        const table = document.querySelector('table');
-        const rows = table.rows;
-        const lastRowIndex = rows.length;
+        function bonuscalc(table){
+            const rows = table.rows;
+            const lastRowIndex = rows.length;
 
-        let categorySum = 0;
-        let bonus = 0;
+            let categorySum = 0;
+            let bonus = 0;
 
-        for (let i = 2; i < lastRowIndex; i++) {
-            const cells = rows[i].cells;
-            const value = parseInt(cells[1].textContent);
-            categorySum += value;
+            for (let i = 2; i < lastRowIndex; i++) {
+                const cells = rows[i].cells;
+                const value = parseInt(cells[1].textContent);
+                categorySum += value;
+            }
+
+            return (Math.round(categorySum / 10));
         }
+        for(let n=0; n<3; n++){
+            
+            let table = document.getElementById('handelnstats');
+            document.getElementById("handelsbonus").textContent = bonuscalc(table);
 
-        bonus = Math.round(categorySum / 10);
-        document.getElementById('bonus').textContent = bonus;
+
+
+            table = document.getElementById('wissenstats');
+            document.getElementById("wissensbonus").textContent = bonuscalc(table);
+
+
+            
+            table = document.getElementById('sozialstats');
+            document.getElementById("sozialbonus").textContent = bonuscalc(table);
+        }
     </script>
 </body>
 
