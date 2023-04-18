@@ -182,7 +182,7 @@
             datasets: [{
             label: 'Prozentchance für Würfelerfolg',
             data: [
-            table1.rows[2].cells[2].textContent,
+                table1.rows[2].cells[2].textContent,
                 table1.rows[3].cells[2].textContent,
                 table1.rows[4].cells[2].textContent,
                 table1.rows[5].cells[2].textContent,
@@ -192,14 +192,30 @@
                 table3.rows[3].cells[2].textContent
             ],
             borderWidth: 1
+            },
+            {
+            label: 'Kritische Erfolgschance',
+            data: [
+                Math.round(table1.rows[2].cells[2].textContent/10),
+                Math.round(table1.rows[3].cells[2].textContent/10),
+                Math.round(table1.rows[4].cells[2].textContent/10),
+                Math.round(table1.rows[5].cells[2].textContent/10),
+                Math.round(table2.rows[2].cells[2].textContent/10),
+                Math.round(table2.rows[3].cells[2].textContent/10),
+                Math.round(table3.rows[2].cells[2].textContent/10),
+                Math.round(table3.rows[3].cells[2].textContent/10)
+            ],
             }]
         },
         options: {
             scales: {
             y: {
                 beginAtZero: true,
-                stacked: true,
+                stacked: false,
                 suggestedMax: 100
+            },
+            x: {
+                stacked: true
             }
             }
         }
