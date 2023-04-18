@@ -49,22 +49,22 @@
         <tr>
             <th>Nahkampf (Einhand)</th>
             <td>25</td>
-            <th></th>
+            <td></td>
         </tr>
         <tr>
             <th>Schießen</th>
             <td>70</td>
-            <th></th>
+            <td></td>
         </tr>
         <tr>
             <th>Zechen</th>
             <td>40</td>
-            <th></th>
+            <td></td>
         </tr>
         <tr>
             <th>Segeln</th>
             <td>30</td>
-            <th></th>
+            <td></td>
         </tr>
     </table>
 
@@ -81,12 +81,12 @@
         <tr>
             <th>Arkane Magie</th>
             <td>40</td>
-            <th></th>
+            <td></td>
         </tr>
         <tr>
             <th>Waffentechnologie</th>
             <td>50</td>
-            <th></th>
+            <td></td>
         </tr>
     </table>
 
@@ -103,12 +103,12 @@
         <tr>
             <th>Menschenkenntnis</th>
             <td>50</td>
-            <th></th>
+            <td></td>
         </tr>
         <tr>
             <th>Betören</th>
             <td>40</td>
-            <th></th>
+            <td></td>
         </tr>
     </table>
 
@@ -128,21 +128,29 @@
 
             return (Math.round(categorySum / 10));
         }
-        for(let n=0; n<3; n++){
+
+        function resulting(table){
+            const rows = table.rows;
+            const lastRowIndex = rows.length;
+
+            for(let i=2; i<lastRowIndex; i++){
+                const cells = rows[i].cells;
+                cells[2].textContent = parseInt(cells[1].textContent) + parseInt(rows[0].cells[1].textContent);
+            }
+        }
             
             let table = document.getElementById('handelnstats');
             document.getElementById("handelsbonus").textContent = bonuscalc(table);
-
-
+            resulting(table);
 
             table = document.getElementById('wissenstats');
             document.getElementById("wissensbonus").textContent = bonuscalc(table);
+            resulting(table);
 
-
-            
             table = document.getElementById('sozialstats');
             document.getElementById("sozialbonus").textContent = bonuscalc(table);
-        }
+            resulting(table);
+
     </script>
 </body>
 
