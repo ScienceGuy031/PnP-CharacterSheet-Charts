@@ -112,6 +112,12 @@
         </tr>
     </table>
 
+    <div>
+        <canvas id="chanceChart"></canvas>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
     <script>
         function bonuscalc(table){
             const rows = table.rows;
@@ -152,6 +158,54 @@
             resulting(table);
 
     </script>
+
+    <script>
+        const ctx = document.getElementById('chanceChart');
+        const table1 = document.getElementById('handelnstats');
+        const table2 = document.getElementById('wissenstats');
+        const table3 = document.getElementById('sozialstats');
+
+
+        new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: [
+                table1.rows[2].cells[0].textContent,
+                table1.rows[3].cells[0].textContent,
+                table1.rows[4].cells[0].textContent,
+                table1.rows[5].cells[0].textContent,
+                table2.rows[2].cells[0].textContent,
+                table2.rows[3].cells[0].textContent,
+                table3.rows[2].cells[0].textContent,
+                table3.rows[3].cells[0].textContent
+            ],
+            datasets: [{
+            label: 'Prozentchance für Würfelerfolg',
+            data: [
+            table1.rows[2].cells[2].textContent,
+                table1.rows[3].cells[2].textContent,
+                table1.rows[4].cells[2].textContent,
+                table1.rows[5].cells[2].textContent,
+                table2.rows[2].cells[2].textContent,
+                table2.rows[3].cells[2].textContent,
+                table3.rows[2].cells[2].textContent,
+                table3.rows[3].cells[2].textContent
+            ],
+            borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+            y: {
+                beginAtZero: true,
+                stacked: true,
+                suggestedMax: 100
+            }
+            }
+        }
+        });
+    </script>
+
 </body>
 
 </html>
