@@ -29,6 +29,11 @@
             border: 1px solid #ccc;
             padding: 5px;
         }
+
+        button {
+            margin: 20px;
+        }
+
     </style>
 </head>
 
@@ -48,22 +53,22 @@
         </tr>
         <tr>
             <th>Nahkampf (Einhand)</th>
-            <td>25</td>
+            <td><div contenteditable>25</div></td>
             <td></td>
         </tr>
         <tr>
             <th>Schießen</th>
-            <td>70</td>
+            <td><div contenteditable>70</div></td>
             <td></td>
         </tr>
         <tr>
             <th>Zechen</th>
-            <td>40</td>
+            <td><div contenteditable>40</div></td>
             <td></td>
         </tr>
         <tr>
             <th>Segeln</th>
-            <td>30</td>
+            <td><div contenteditable>30</div></td>
             <td></td>
         </tr>
     </table>
@@ -80,12 +85,12 @@
         </tr>
         <tr>
             <th>Arkane Magie</th>
-            <td>40</td>
+            <td><div contenteditable>40</div></td>
             <td></td>
         </tr>
         <tr>
             <th>Waffentechnologie</th>
-            <td>50</td>
+            <td><div contenteditable>50</div></td>
             <td></td>
         </tr>
     </table>
@@ -102,15 +107,17 @@
         </tr>
         <tr>
             <th>Menschenkenntnis</th>
-            <td>50</td>
+            <td><div contenteditable>50</div></td>
             <td></td>
         </tr>
         <tr>
             <th>Betören</th>
-            <td>40</td>
+            <td><div contenteditable>40</div></td>
             <td></td>
         </tr>
     </table>
+
+    <button onclick="recalculate()">recalculate</button>
 
     <div>
         <canvas id="chanceChart"></canvas>
@@ -144,7 +151,71 @@
                 cells[2].textContent = parseInt(cells[1].textContent) + parseInt(rows[0].cells[1].textContent);
             }
         }
-            
+
+        function barChart(){
+            const ctx = document.getElementById('chanceChart');
+            const table1 = document.getElementById('handelnstats');
+            const table2 = document.getElementById('wissenstats');
+            const table3 = document.getElementById('sozialstats');
+
+
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: [
+                        table1.rows[2].cells[0].textContent,
+                        table1.rows[3].cells[0].textContent,
+                        table1.rows[4].cells[0].textContent,
+                        table1.rows[5].cells[0].textContent,
+                        table2.rows[2].cells[0].textContent,
+                        table2.rows[3].cells[0].textContent,
+                        table3.rows[2].cells[0].textContent,
+                        table3.rows[3].cells[0].textContent
+                    ],
+                    datasets: [{
+                    label: 'Prozentchance für Würfelerfolg',
+                    data: [
+                        table1.rows[2].cells[2].textContent,
+                        table1.rows[3].cells[2].textContent,
+                        table1.rows[4].cells[2].textContent,
+                        table1.rows[5].cells[2].textContent,
+                        table2.rows[2].cells[2].textContent,
+                        table2.rows[3].cells[2].textContent,
+                        table3.rows[2].cells[2].textContent,
+                        table3.rows[3].cells[2].textContent
+                    ],
+                    borderWidth: 1
+                    },
+                    {
+                    label: 'Kritische Erfolgschance',
+                    data: [
+                        Math.round(table1.rows[2].cells[2].textContent/10),
+                        Math.round(table1.rows[3].cells[2].textContent/10),
+                        Math.round(table1.rows[4].cells[2].textContent/10),
+                        Math.round(table1.rows[5].cells[2].textContent/10),
+                        Math.round(table2.rows[2].cells[2].textContent/10),
+                        Math.round(table2.rows[3].cells[2].textContent/10),
+                        Math.round(table3.rows[2].cells[2].textContent/10),
+                        Math.round(table3.rows[3].cells[2].textContent/10)
+                    ],
+                }]
+            },
+            options: {
+                scales: {
+                y: {
+                    beginAtZero: true,
+                    stacked: false,
+                    suggestedMax: 100
+                },
+                x: {
+                    stacked: true
+                }
+                }
+            }
+            });
+        }
+
+        function recalculate(){
             let table = document.getElementById('handelnstats');
             document.getElementById("handelsbonus").textContent = bonuscalc(table);
             resulting(table);
@@ -156,70 +227,12 @@
             table = document.getElementById('sozialstats');
             document.getElementById("sozialbonus").textContent = bonuscalc(table);
             resulting(table);
-
-    </script>
-
-    <script>
-        const ctx = document.getElementById('chanceChart');
-        const table1 = document.getElementById('handelnstats');
-        const table2 = document.getElementById('wissenstats');
-        const table3 = document.getElementById('sozialstats');
-
-
-        new Chart(ctx, {
-        type: 'bar',
-        data: {
-            labels: [
-                table1.rows[2].cells[0].textContent,
-                table1.rows[3].cells[0].textContent,
-                table1.rows[4].cells[0].textContent,
-                table1.rows[5].cells[0].textContent,
-                table2.rows[2].cells[0].textContent,
-                table2.rows[3].cells[0].textContent,
-                table3.rows[2].cells[0].textContent,
-                table3.rows[3].cells[0].textContent
-            ],
-            datasets: [{
-            label: 'Prozentchance für Würfelerfolg',
-            data: [
-                table1.rows[2].cells[2].textContent,
-                table1.rows[3].cells[2].textContent,
-                table1.rows[4].cells[2].textContent,
-                table1.rows[5].cells[2].textContent,
-                table2.rows[2].cells[2].textContent,
-                table2.rows[3].cells[2].textContent,
-                table3.rows[2].cells[2].textContent,
-                table3.rows[3].cells[2].textContent
-            ],
-            borderWidth: 1
-            },
-            {
-            label: 'Kritische Erfolgschance',
-            data: [
-                Math.round(table1.rows[2].cells[2].textContent/10),
-                Math.round(table1.rows[3].cells[2].textContent/10),
-                Math.round(table1.rows[4].cells[2].textContent/10),
-                Math.round(table1.rows[5].cells[2].textContent/10),
-                Math.round(table2.rows[2].cells[2].textContent/10),
-                Math.round(table2.rows[3].cells[2].textContent/10),
-                Math.round(table3.rows[2].cells[2].textContent/10),
-                Math.round(table3.rows[3].cells[2].textContent/10)
-            ],
-            }]
-        },
-        options: {
-            scales: {
-            y: {
-                beginAtZero: true,
-                stacked: false,
-                suggestedMax: 100
-            },
-            x: {
-                stacked: true
-            }
-            }
+            //reBarChart(document.getElementById('chanceChart'));
         }
-        });
+            
+            recalculate();
+            barChart();
+
     </script>
 
 </body>
