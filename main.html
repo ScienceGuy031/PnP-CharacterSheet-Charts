@@ -41,86 +41,89 @@
     <header>
         <h1>Charactersheet</h1>
     </header>
-    <table id="handelnstats">
-        <tr>
-            <th>Handelsbonus</th>
-            <td colspan=2 id="handelsbonus"></td>
-        </tr>
-        <tr>
-            <th>Fähigkeit</th>
-            <th>vergebene Punkte</th>
-            <th>resultierender Fähigkeitswert</th>
-        </tr>
-        <tr>
-            <th>Nahkampf (Einhand)</th>
-            <td><div contenteditable>25</div></td>
-            <td></td>
-        </tr>
-        <tr>
-            <th>Schießen</th>
-            <td><div contenteditable>70</div></td>
-            <td></td>
-        </tr>
-        <tr>
-            <th>Zechen</th>
-            <td><div contenteditable>40</div></td>
-            <td></td>
-        </tr>
-        <tr>
-            <th>Segeln</th>
-            <td><div contenteditable>30</div></td>
-            <td></td>
-        </tr>
-    </table>
+    <div style="width:800px; margin:0 auto;">
+        <center>
+        <table id="handelnstats">
+            <tr>
+                <th>Handelsbonus</th>
+                <td colspan=2 id="handelsbonus"></td>
+            </tr>
+            <tr>
+                <th>Fähigkeit</th>
+                <th>vergebene Punkte</th>
+                <th>resultierender Fähigkeitswert</th>
+            </tr>
+            <tr>
+                <th>Nahkampf (Einhand)</th>
+                <td><div contenteditable>25</div></td>
+                <td></td>
+            </tr>
+            <tr>
+                <th>Schießen</th>
+                <td><div contenteditable>70</div></td>
+                <td></td>
+            </tr>
+            <tr>
+                <th>Zechen</th>
+                <td><div contenteditable>40</div></td>
+                <td></td>
+            </tr>
+            <tr>
+                <th>Segeln</th>
+                <td><div contenteditable>30</div></td>
+                <td></td>
+            </tr>
+        </table>
 
-    <table id="wissenstats">
-        <tr>
-            <th>Wissensbonus</th>
-            <td colspan=2 id="wissensbonus"></td>
-        </tr>
-        <tr>
-            <th>Fähigkeit</th>
-            <th>vergebene Punkte</th>
-            <th>resultierender Fähigkeitswert</th>
-        </tr>
-        <tr>
-            <th>Arkane Magie</th>
-            <td><div contenteditable>40</div></td>
-            <td></td>
-        </tr>
-        <tr>
-            <th>Waffentechnologie</th>
-            <td><div contenteditable>50</div></td>
-            <td></td>
-        </tr>
-    </table>
+        <table id="wissenstats">
+            <tr>
+                <th>Wissensbonus</th>
+                <td colspan=2 id="wissensbonus"></td>
+            </tr>
+            <tr>
+                <th>Fähigkeit</th>
+                <th>vergebene Punkte</th>
+                <th>resultierender Fähigkeitswert</th>
+            </tr>
+            <tr>
+                <th>Arkane Magie</th>
+                <td><div contenteditable>40</div></td>
+                <td></td>
+            </tr>
+            <tr>
+                <th>Waffentechnologie</th>
+                <td><div contenteditable>50</div></td>
+                <td></td>
+            </tr>
+        </table>
 
-    <table id="sozialstats">
-        <tr>
-            <th>Sozialbonus</th>
-            <td colspan=2 id="sozialbonus"></td>
-        </tr>
-        <tr>
-            <th>Fähigkeit</th>
-            <th>vergebene Punkte</th>
-            <th>resultierender Fähigkeitswert</th>
-        </tr>
-        <tr>
-            <th>Menschenkenntnis</th>
-            <td><div contenteditable>50</div></td>
-            <td></td>
-        </tr>
-        <tr>
-            <th>Betören</th>
-            <td><div contenteditable>40</div></td>
-            <td></td>
-        </tr>
-    </table>
+        <table id="sozialstats">
+            <tr>
+                <th>Sozialbonus</th>
+                <td colspan=2 id="sozialbonus"></td>
+            </tr>
+            <tr>
+                <th>Fähigkeit</th>
+                <th>vergebene Punkte</th>
+                <th>resultierender Fähigkeitswert</th>
+            </tr>
+            <tr>
+                <th>Menschenkenntnis</th>
+                <td><div contenteditable>50</div></td>
+                <td></td>
+            </tr>
+            <tr>
+                <th>Betören</th>
+                <td><div contenteditable>40</div></td>
+                <td></td>
+            </tr>
+        </table>
 
-    <button onclick="recalculate()">recalculate</button>
-
-    <div>
-        <canvas id="chanceChart"></canvas>
+        <button onclick="recalculate()">recalculate</button>
+    </center>
+        <div style="position: relative; height:40vh; width:80vw">
+            <canvas id="chanceChart"></canvas>
+        </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -227,7 +230,6 @@
             table = document.getElementById('sozialstats');
             document.getElementById("sozialbonus").textContent = bonuscalc(table);
             resulting(table);
-            //reBarChart(document.getElementById('chanceChart'));
         }
             
             recalculate();
